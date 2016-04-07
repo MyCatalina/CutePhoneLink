@@ -9,17 +9,17 @@ import android.content.Context;
 
 public class GameConf {
     //设置连连看中每个方块的宽高
-    public  static final int PIECE_WIDTH = 50;
-    public  static final int PIECE_HEIGHT = 50;
+    public static final int PIECE_WIDTH = 50;
+    public static final int PIECE_HEIGHT = 50;
     //设置游戏的默认时间
-    private static int DEFAULT_TIME = 100;
+    public static int DEFAULT_TIME = 50;
     //在Piece[][]中，数组一维的长度
     private int xSize;
     //在Piece[][]中，数组二维的长度
     private int ySize;
     //Board中第一张图片出现的X坐标
     private int beginImageX;
-    //board中第二张图片出现的Y坐标
+    //board中第一张图片出现的Y坐标
     private int beginImageY;
     //记录游戏的总时间
     private long gametime;
