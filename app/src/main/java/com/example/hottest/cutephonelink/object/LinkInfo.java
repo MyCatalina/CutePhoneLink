@@ -21,7 +21,7 @@ public class LinkInfo {
         points.add(point1);
         points.add(point2);
     }
-    //表示三个方块之间可以相连，point2是point1和point3之间的转折点
+    //表示三个方块之间可以相连，point2是point1和point3之间的转折点，其依次顺序为从左到右
     public LinkInfo(Point point1,Point point2,Point point3){
         points.add(point1);
         points.add(point2);
@@ -31,6 +31,8 @@ public class LinkInfo {
     public LinkInfo(Point point1,Point point2,Point point3,Point point4){
         points.add(point1);
         points.add(point2);
+        points.add(point3);
+        points.add(point4);
     }
     //返回连接集合
     public List<Point> getLinkPoints(){
