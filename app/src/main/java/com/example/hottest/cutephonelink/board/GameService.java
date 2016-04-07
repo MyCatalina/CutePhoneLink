@@ -35,5 +35,5 @@ public interface GameService {
      * @param p1 第一个Piece对象
      * @param p2 第二个Piece对象
      */
-    LinkInfo link(Point p1, Point p2);
+    LinkInfo link(Piece p1, Piece p2);
 }
