@@ -3,6 +3,9 @@ package com.example.hottest.cutephonelink.view;
 /**
  * Created by hottest on 2016/3/12.
  */
+
+import android.graphics.Point;
+
 /**Piece类封装游戏界面一个方块的具体位置，包括其相对于界面的位置（X,Y），以及在所有方块中的位置*/
 
 public class Piece {
@@ -10,7 +13,7 @@ public class Piece {
     //方块左上角在布局界面的位置
     private int beginX;
     private int beginY;
-    //方块在Piece[][]二位数据中的位置
+    //方块在Piece[][]二维数组中的位置
     private int indexX;
     private int indexY;
 //设置Piece在棋盘数组中的位置
@@ -20,6 +23,7 @@ public class Piece {
     }
 
     public int getBeginX() {
+
         return beginX;
     }
 
@@ -58,6 +62,12 @@ public class Piece {
     public void setPieceImage(PieceImage pieceImage) {
         this.pieceImage = pieceImage;
     }
+    //获取该Piece对象的中心点位置，
+    public Point getCenter(){
+        return new Point(getPieceImage().getBitmap().getWidth()/2+getBeginX(),
+                getPieceImage().getBitmap().getHeight()/2+getBeginY());
+    }
+
     //判断两个piece是否为同一个
     public boolean isSameImage(Piece other){
         if(pieceImage==null){
