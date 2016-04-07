@@ -9,8 +9,10 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Shader;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
+import com.example.hottest.cutephonelink.Link;
 import com.example.hottest.cutephonelink.R;
 import com.example.hottest.cutephonelink.board.GameService;
 import com.example.hottest.cutephonelink.object.LinkInfo;
@@ -50,6 +52,7 @@ public class GameView extends View {
         this.linkInfo = linkInfo;
     }
 
+    //onDraw调用的时间？？？
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -61,7 +64,8 @@ public class GameView extends View {
                 for (int j = 0; j < pieces[i].length; j++) {
                     if (pieces[i][j] != null) {
                         Piece piece = pieces[i][j];
-                        canvas.drawBitmap(piece.getPieceImage().getBitmap(), piece.getBeginX(), piece.getBeginY(), null);
+                        canvas.drawBitmap(piece.getPieceImage().getBitmap(),
+                                piece.getBeginX(), piece.getBeginY(), null);
                     }
                 }
             }
@@ -70,29 +74,37 @@ public class GameView extends View {
             //绘制连接线
             drawLine(this.linkInfo, canvas);
             //处理完后清空linkInfo对象
-            this.linkInfo=null;
+            this.linkInfo = null;
         }
         //画选中标识的图片
-        if(this.selectedPiece!=null){
-            canvas.drawBitmap(this.selectedImage,selectedPiece.getBeginX(),selectedPiece.getBeginY(),null);
+        if (this.selectedPiece != null) {
+            canvas.drawBitmap(this.selectedImage, selectedPiece.getBeginX(),
+                    selectedPiece.getBeginY(), null);
         }
     }
+
     //根据linkInfo绘制连接线的方法
-    public void drawLine(LinkInfo linkInfo,Canvas canvas){
-         List<Point> linkPoints = linkInfo.getLinkPoints();
+    public void drawLine(LinkInfo linkInfo, Canvas canvas) {
+        List<Point> linkPoints = linkInfo.getLinkPoints();
         //遍历linkInfo中的所有点
-        for(int i=0;i<linkPoints.size()-1;i++){
-            Point currentpoint=linkPoints.get(i);
-            Point nextpoint=linkPoints.get(i+1);
-            canvas.drawLine(currentpoint.x,currentpoint.y,nextpoint.x,nextpoint.y,paint);
+        for (int i = 0; i < linkPoints.size() - 1; i++) {
+            Point currentpoint = linkPoints.get(i);
+            Point nextpoint = linkPoints.get(i + 1);
+            canvas.drawLine(currentpoint.x, currentpoint.y, nextpoint.x, nextpoint.y, paint);
         }
     }
+
     //设置当前选中的选中方块的方法
-    public void setSelectPiece(Piece piece){
-        this.selectedPiece=piece;
+    public void setSelectPiece(Piece piece) {
+        this.selectedPiece = piece;
     }
-    public void startGame(){
+
+    public void startGame() {
         this.gameService.start();
+        /*自定义一个View时，重写其onDraw（)方法，
+         调用View.invalidate()时，会触发onDraw()和computeScroll()(前提是将该View添加到窗口上)
+         View.postInvalidate();是在非UI线程上调用的
+*/
         this.postInvalidate();
     }
 }
